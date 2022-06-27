@@ -6,7 +6,7 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True, static_url_path='/static')
     app.config.from_mapping(
-        SECRET_KEY='dev',
+        SECRET_KEY='reallllllllllllllly long key',
     )
 
     if test_config is None:
@@ -31,7 +31,6 @@ def create_app(test_config=None):
         nav = [
             {"text":"Home", "url":url_for('index')},
             {"text":"Stock", "url":url_for('stock')},
-            {"text":"About", "url":url_for('about')},
         ]
         return dict(navbar = nav)
 
@@ -46,9 +45,6 @@ def create_app(test_config=None):
     app.register_blueprint(stock.bp)
     app.add_url_rule('/stock', endpoint='stock')
 
-    @app.route('/about')
-    def about():
-        return render_template('about.html')
 
 
 

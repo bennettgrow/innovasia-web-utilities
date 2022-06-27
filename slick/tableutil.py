@@ -11,7 +11,7 @@ def filter():
     pass
 
 def conv_html(df):
-    return df.to_html(classes=['table','table-striped', 'table-hover', 'table-bordered'], justify='center', index=False)
+    return df.to_html(classes=['table','table-striped', 'table-hover', 'table-bordered', 'table-sm'], justify='center', index=False)
 
 def demodata():
     return pd.read_csv('demo.csv')
