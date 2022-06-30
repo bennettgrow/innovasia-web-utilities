@@ -1,4 +1,7 @@
+buildtools
 flask
 flask-bootstrap
 pandas
 flask-wtf
+sqlalchemy
+pyodbc
