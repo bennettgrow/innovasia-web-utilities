@@ -1,12 +1,34 @@
 # innovasia-web-utilities
- 
+## Screenshots
+<details>
+<summary> Home Page </summary>
+![Home Page](/project/static/images/screenshot_index.png)
+<img src="/project/static/images/screenshot_index.png">
+</details>
+
+<details>
+<summary> Inventory Stock Checking </summary>
+![Home Page](/project/static/images/screenshot_stock.png)
+</details>
+
+<details>
+<summary> Lot Number Checking </summary>
+![Home Page](/project/static/images/screenshot_lots.png)
+</details>
+
+
 ## Installation
+<details>
+<summary> Requirements </summary>
 Reccomended python version 3.10 or greater.
-MSSQL databases are supported using client based Microsoft ODBC, hence SQLAlchemy utilizing pyodbc with a DSN. For a 32-bit SQL server, 32 bit python must be used with a 32 bit ODBC DSN. See configuration section below.
+MSSQL databases are supported using client based Microsoft ODBC, hence SQLAlchemy utilizing pyodbc with a DSN. For a 32-bit SQL server, 32 bit python must be used with a 32 bit ODBC DSN. See configuration section below. Specific python package requirements in "requirements.txt"
 
----
+</details>
+<details>
+<summary> Installation steps </summary>
 
-### Steps for 32 bit operations:
+Steps for 32 bit operations:
+
 - Install python 3.10 32 bit
 - Upgrade pip to the latest version
   
@@ -31,8 +53,10 @@ MSSQL databases are supported using client based Microsoft ODBC, hence SQLAlchem
 
     ` deactivate `
 
----
-### Configuration
+</details>
+
+<details>
+<summary> Configuration </summary>
 A configuration file must be created in the main directory called `config.ini` . This allows, usually sensitive, information to be stored separately from the other files. Currently, `config.ini` must look something like this:
 
 ```
@@ -51,9 +75,11 @@ pwd=password
 
 [odbc] 
 - App is currently configured such that an ODBC DSN must be configured for use with a MSSQL database. As mentioned above, a 32-bit SQL server/DSN must use a 32-bit python installation. 
+</details>
 
----
-### To start the server:
+<details>
+<summary> Start the app </summary>
+
 - Enter the virtual environment
 
     ` .\venv-32\Scripts\activate`
@@ -61,8 +87,12 @@ pwd=password
 - Run `run.py`
 
     ` python run.py `
----
-### To stop the server
+
+</details>
+<details>
+<summary> Stop the app </summary>
+
 - `Ctrl-C` to halt
 - `deactivate` to exit virtual environment
----
+
+</details>
