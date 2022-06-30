@@ -1,8 +1,8 @@
-# slick
+# innovasia-web-utilities
  
 ## Installation
 Reccomended python version 3.10 or greater.
-MSSQL databases are supported using client based Microsoft ODBC, hence `SQLAlchemy` utilizing `pyodbc` with a DSN. For a 32-bit SQL server, 32 bit python must be used with a 32 bit ODBC DSN. See configuration section below.
+MSSQL databases are supported using client based Microsoft ODBC, hence SQLAlchemy utilizing pyodbc with a DSN. For a 32-bit SQL server, 32 bit python must be used with a 32 bit ODBC DSN. See configuration section below.
 
 ---
 
@@ -25,7 +25,7 @@ MSSQL databases are supported using client based Microsoft ODBC, hence `SQLAlche
 
     ` pip install -r .\requirements.txt `
 
-    > Note: Issues using pip to install legacy 32 bit packages exist. If ` buildtools ` cannot be installed with pip, install Microsoft C++ Buildtools (https://visualstudio.microsoft.com/visual-cpp-build-tools/), launch, modify, and enable `Desktop development using C++`. Then reattempt installing packages.
+    > Note: Issues using pip to install legacy 32 bit packages exist. If "buildtools" cannot be installed with pip, install Microsoft C++ Buildtools (https://visualstudio.microsoft.com/visual-cpp-build-tools/), launch, modify, and enable "Desktop development using C++". Then reattempt installing packages.
 
 - Exit the virtual environment when installation is complete
 
