@@ -1,19 +1,21 @@
 # innovasia-web-utilities
+
+A simple web app built on the Python framework Flask that queries and displays data from multiple SQL databases with a simple UI.
+
 ## Screenshots
 <details>
 <summary> Home Page </summary>
-![Home Page](/project/static/images/screenshot_index.png)
 <img src="/project/static/images/screenshot_index.png">
 </details>
 
 <details>
 <summary> Inventory Stock Checking </summary>
-![Home Page](/project/static/images/screenshot_stock.png)
+<img src="/project/static/images/screenshot_stock.png">
 </details>
 
 <details>
 <summary> Lot Number Checking </summary>
-![Home Page](/project/static/images/screenshot_lots.png)
+<img src="/project/static/images/screenshot_lots.png">
 </details>
 
 
@@ -52,6 +54,8 @@ Steps for 32 bit operations:
 - Exit the virtual environment when installation is complete
 
     ` deactivate `
+
+- Actual deployment should use a WSGI server, like Apache with Mod-WSGI
 
 </details>
 
