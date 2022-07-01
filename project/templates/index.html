@@ -39,7 +39,13 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#homepage">
               <div class="accordion-body">
-                You can check what inventory items are in stock and where they are on the "Stock" page. Be patient while the server retrieves the data. 
+                You can check what inventory items are in stock and where they are on the "Stock" page. Be patient while the server retrieves the data.
+                <br> <br>
+                <a href="{{ url_for('stock') }}">
+                  <center>
+                    <button class="btn btn-outline-secondary" type="button" >Check Stock</button>
+                  </center>
+                </a>
               </div>
             </div>
           </div>
@@ -52,6 +58,12 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#homepage">
               <div class="accordion-body">
                 You can check what lot numbers are available for each inventory item on the "Lots" page. Be patient while the server retrieves the data. 
+                <br> <br>
+                <a href="{{ url_for('lots') }}">
+                  <center>
+                    <button class="btn btn-outline-secondary" type="button" >Check Lot Numbers</button>
+                  </center>
+                </a>
               </div>
             </div>
           </div>
