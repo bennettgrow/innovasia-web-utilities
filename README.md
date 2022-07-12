@@ -44,12 +44,22 @@ Steps for 32 bit operations:
 - Enter the virtual environment
 
     ` .\venv-32\Scripts\activate `
+  
+    or on linux:
+  
+    `source venv-32/bin/activate
 
 - Install required packages
 
     ` pip install -r .\requirements.txt `
 
     > Note: Issues using pip to install legacy 32 bit packages exist. If "buildtools" cannot be installed with pip, install Microsoft C++ Buildtools (https://visualstudio.microsoft.com/visual-cpp-build-tools/), launch, modify, and enable "Desktop development using C++". Then reattempt installing packages.
+  
+    On linux you likely need higher permissions, so try commands formatted like
+  
+    `sudo -E env PATH=$PATH python3 -m pip install -r requirements.txt`
+  
+    This inherits virtual environement path variables while using sudo
 
 - Exit the virtual environment when installation is complete
 
