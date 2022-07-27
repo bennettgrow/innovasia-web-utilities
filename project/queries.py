@@ -35,7 +35,7 @@ def stockcheck(ID='%', SITE='%'):
     ON site.InvtID=inv.InvtID
     )
 
-    SELECT  TOP 100 *
+    SELECT *
     FROM comb
     WHERE QtyOnHand > '0' 
     '''
