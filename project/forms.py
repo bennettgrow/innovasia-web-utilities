@@ -5,3 +5,4 @@ class IDandSITEForm(FlaskForm):
     ID = StringField("ID")
     SITE = SelectField('Site')
     Query = SubmitField("Query")
+

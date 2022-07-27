@@ -14,8 +14,11 @@
             {{ form.csrf_token() }}
             {{ form.ID(class="form-control", size=32, placeholder="Inventory ID") }}
             {{ form.SITE(class="custom-select", placeholder="Site ID") }}
-            {{ form.Query(class="btn btn-outline-secondary") }}
+            {{ form.Query(class="btn btn-outline-success") }}
         </form>
+        <a href="{{ url_for('download') }}">
+          <button class="btn btn-outline-info m-1" type="button" > Download </button>
+        </a>
         <button class="btn btn-outline-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Help </button>
 
       </div>
