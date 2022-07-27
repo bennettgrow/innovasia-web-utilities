@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, make_response, session
 from flask_bootstrap import Bootstrap
 from . import parser
 
@@ -33,5 +33,15 @@ def create_app(test_config=None):
 
     app.register_blueprint(lots.bp)
     app.add_url_rule('/lots', endpoint='lots')
+
+    @app.route('/download')
+    def download():
+        dfcsv = session["dfcsv"]
+        resp = make_response(dfcsv)
+        resp.headers["Content-Disposition"] = "attachment; filename=export.csv"
+        resp.headers["Content-Type"] = "text/csv"
+        print('Download...')
+        return resp
+
 
     return app

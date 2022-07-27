@@ -5,3 +5,4 @@ pandas
 flask-wtf
 sqlalchemy
 pyodbc
+flask-session

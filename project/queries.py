@@ -66,7 +66,7 @@ def lotcheck(ID='%', SITE='%'):
     SELECT * FROM INNOTHBAPP.dbo.LotSerMst
     )
 
-    SELECT TOP 100 InvtID, SiteID, LotSerNbr, QtyAvail, QtyOnHand, SrcOrdNbr
+    SELECT InvtID, SiteID, LotSerNbr, QtyAvail, QtyOnHand, SrcOrdNbr
     FROM comb
     WHERE QtyOnHand > '0'
     '''

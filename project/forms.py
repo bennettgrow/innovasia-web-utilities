@@ -6,5 +6,3 @@ class IDandSITEForm(FlaskForm):
     SITE = SelectField('Site')
     Query = SubmitField("Query")
 
-class CSVform(FlaskForm):
-    downCSV = SubmitField("Download CSV")

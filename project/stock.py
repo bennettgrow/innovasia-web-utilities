@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, url_for, Response
+from flask import Blueprint, render_template, session, url_for
 import pandas
-from requests import session
 from . import tableutil as t
 from . import forms
 from . import queries
@@ -13,7 +12,7 @@ def stock():
 
     # ID and SITE form
     form = forms.IDandSITEForm()
-    formparams = {"ID":"9x9x9x9", "SITE":"%"} # Random data to return an empty initial query
+    formparams = {"ID":"9x9x9x9x9x9x9", "SITE":"%"} # Random data to return an empty initial query
 
     sqlstr = queries.stockcheck(**formparams)
     df = t.runquery(sqlstr)
@@ -35,9 +34,10 @@ def stock():
         sqlstr = queries.stockcheck(**formparams)
         df = t.runquery(sqlstr)
 
-    
-    
-    numrows = df.shape[0]
+    # numrows = df.shape[0]
+
+    dfcsv = df.to_csv(index=False, header=True, sep=",")
+    session["dfcsv"] = dfcsv
 
     res = t.conv_html(df)
     return render_template('stock.html', res=res, form=form)

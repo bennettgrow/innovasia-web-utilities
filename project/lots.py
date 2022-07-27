@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, session, url_for
 import pandas
-from requests import session
 from . import tableutil as t
 from . import forms
 from . import queries
@@ -13,7 +12,7 @@ def stock():
 
     # ID and SITE form
     form = forms.IDandSITEForm()
-    formparams = {"ID":"%", "SITE":"%"}
+    formparams = {"ID":"9x9x9x9x9x9x9", "SITE":"%"}
 
     sqlstr = queries.lotcheck(**formparams)
     df = t.runquery(sqlstr)
@@ -23,16 +22,20 @@ def stock():
         form.SITE.data = '%'
 
     if form.Query.data:
+        if form.ID.data == "" and form.SITE.data != "":
+            formparams['ID'] = "%"
+            formparams['SITE'] = form.SITE.data
+        
         if form.ID.data != "":
             formparams['ID'] = form.ID.data
+
         formparams['SITE'] = form.SITE.data
 
         sqlstr = queries.lotcheck(**formparams)
         df = t.runquery(sqlstr)
-        # col = list(df)
-
         
-    #print("++++   ID: " + formparams['ID'] + "     SITE: " + formparams['SITE'] + "   ++++")
-
+    dfcsv = df.to_csv(index=False, header=True, sep=",")
+    session["dfcsv"] = dfcsv
+        
     res = t.conv_html(df.head(100))
     return render_template('lots.html', res=res, form=form)

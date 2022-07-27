@@ -17,9 +17,3 @@ def runquery(sqlstr):
     engine = create_engine(connectstring)
     df = pd.read_sql_query(sql=sqlstr, con=engine)
     return df
-
-def download_csv(df, filename):
-    resp = make_response(df.to_csv())
-    resp.headers["Content-Disposition"] = "attachment; filename={}".format(filename)
-    resp.headers["Content-Type"] = "text/csv"
-    return resp
