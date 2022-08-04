@@ -6,20 +6,25 @@
     <div class="container text-center">
 
       <h1 class="display-3"> Stock Check</h1>
+      <p> Rows: {{ numrows }} </p>
       <!hr>
 
-      <div class="form-inline justify-content-center p-3 ">
+      <div class="input-group justify-content-center p-3 ">
         <form action="" method="post" novalidate>
 
           {{ form.csrf_token() }}
-          {{ form.ID(class="form-control", size=32, placeholder="Inventory ID") }}
+          {{ form.ID(class="form-control", size=24, placeholder="Inventory ID") }}
+          {{ form.DESC(class="form-control", size=32, placeholder="Description") }}
           {{ form.SITE(class="custom-select", placeholder="Site ID") }}
+          <div class="input-group-prepend">
+            {{ form.QTY(class="custom-select", placeholder="Quantity") }}
+            {{ form.EQUALITY(class="custom-select", placeholder="Equality") }}
+            {{ form.ADD(class="form-control", size=24, placeholder="Quantity") }}
+          </div> 
           {{ form.Query(class="btn btn-outline-success") }}
+          <button class="btn btn-outline-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Help </button>
+
         </form>
-        <a href="{{ url_for('download') }}">
-          <button class="btn btn-outline-info m-1" type="button" > Download </button>
-        </a>
-        <button class="btn btn-outline-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Help </button>
 
 
       </div>
@@ -32,6 +37,12 @@
           Enter an exact inventory id, or add a '%' a the end to see IDs that begin with your entry.
           <br>
           For example: '2022%' returns inventory IDs that begin with '2022'
+          <br>
+          Alternatively, you can search for a word in the description.
+          <br>
+          For example: '%Blueberry%' returns any items that have 'Blueberry' in the description.
+          <br>
+          Will only display results where QtyOnHand > 0
         </div>
       </div>
 

@@ -17,14 +17,10 @@ def stock():
     sqlstr = queries.lotcheck(**formparams)
     df = t.runquery(sqlstr)
     form.SITE.choices = [('%','All Locations'), ('HGZ','China'), ('MAIN','Japan'), ('IS','Singapore'), ('MY','Malaysia'), ('HK','Hong Kong'), ('CUSTOMER','Customer'), ('SE','SE'), ('TH','Thailand'), ('US','United States')]
-    
-    if form.data == None:
-        form.SITE.data = '%'
 
     if form.Query.data:
         if form.ID.data == "" and form.SITE.data != "":
             formparams['ID'] = "%"
-            formparams['SITE'] = form.SITE.data
         
         if form.ID.data != "":
             formparams['ID'] = form.ID.data
@@ -33,9 +29,11 @@ def stock():
 
         sqlstr = queries.lotcheck(**formparams)
         df = t.runquery(sqlstr)
+
+    numrows = df.shape[0]
         
-    dfcsv = df.to_csv(index=False, header=True, sep=",")
-    session["dfcsv"] = dfcsv
+    # dfcsv = df.to_csv(index=False, header=True, sep=",")
+    # session["dfcsv"] = dfcsv
         
-    res = t.conv_html(df.head(100))
-    return render_template('lots.html', res=res, form=form)
+    res = t.conv_html(df)
+    return render_template('lots.html', res=res, form=form, numrows=numrows)

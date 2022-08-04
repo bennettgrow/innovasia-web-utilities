@@ -5,35 +5,40 @@
 <div class="container d-flex align-items-center">
     <div class="container text-center">
 
-        <h1 class="display-3"> Lot Check</h1>
+        <h1 class="display-3"> Item Sales History</h1>
         <p> Rows: {{ numrows }} </p>
         <!hr>
 
-        <div class="form-inline justify-content-center p-3 ">
+        <div class="input-group justify-content-center p-3">
           <form action="" method="post" novalidate>
 
             {{ form.csrf_token() }}
             {{ form.ID(class="form-control", size=24, placeholder="Inventory ID") }}
+            {{ form.DESC(class="form-control", size=32, placeholder="Description") }}
             {{ form.SITE(class="custom-select", placeholder="Site ID") }}
+            <div class="input-group-prepend">
+                <div class="input-group-text">Year</div>
+                {{ form.EQUALITY(class="custom-select", placeholder="place") }}
+            {{ form.ADD(class="form-control", size=8, placeholder="Year")}}
+            </div>
             {{ form.Query(class="btn btn-outline-success") }}
+            <button class="btn btn-outline-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Help </button>
+
         </form>
-        <!a href="{{ url_for('download') }}">
-          <!button class="btn btn-outline-info m-1" type="button" > </button>
-        <!/a>
-        <button class="btn btn-outline-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Help </button>
+
 
       </div>
       
 
       <div class="collapse m-2" id="collapseExample">
         <div class="card card-body">
-          Returns first 100 query results. Please be patient while the server fetches the data.
+          Please be patient while the server fetches the data.
           <br>
           Enter an exact inventory id, or add a '%' a the end to see IDs that begin with your entry.
           <br>
           For example: '2022%' returns inventory IDs that begin with '2022'
           <br>
-          Will only display results where QtyOnHand > 0
+          Hitting 'Query' without filtering takes a very long time to process. 
         </div>
       </div>
 
