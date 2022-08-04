@@ -26,13 +26,16 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
 
-    from . import stock, lots
+    from . import stock, lots, itemsales
 
     app.register_blueprint(stock.bp)
     app.add_url_rule('/stock', endpoint='stock')
 
     app.register_blueprint(lots.bp)
     app.add_url_rule('/lots', endpoint='lots')
+
+    app.register_blueprint(itemsales.bp)
+    app.add_url_rule('/itemsales', endpoint='itemsales')
 
     @app.route('/download')
     def download():
