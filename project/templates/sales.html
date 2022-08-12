@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-sm ">
+    <div class="row justify-content-center">
+      <div class="col col-md-auto">
+        <p style="text-align:center">
+        <br>
+        <img src="/static/images/inno_group.png" width="341" height="186" >
+        <br><br>
+      </p>
+      </div>
+    </div>
+
+
+
+    <div class="row justify-content-center">
+      <div class="col col-6">
+
+
+        <a href="{{ url_for('itemsales') }}">
+            <center>
+            <button class="btn btn-outline-secondary" type="button" >Item Sales</button>
+            </center>
+        </a>
+
+        <a href="{{ url_for('vendorpo') }}">
+            <center>
+            <button class="btn btn-outline-secondary" type="button" >Vendor POs</button>
+            </center>
+        </a>
+
+      </div>  
+
+</div>
+
+{% endblock %}

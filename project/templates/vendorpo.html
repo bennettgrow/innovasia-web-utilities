@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container d-flex align-items-center">
+    <div class="container text-center">
+
+        <h1 class="display-3"> Vendor Purchasing History</h1>
+        <p> Rows: {{ numrows }} </p>
+        <!hr>
+
+        <div class="input-group justify-content-center p-3">
+          <form action="" method="post" novalidate>
+
+            {{ form.csrf_token() }}
+            {{ form.DESC(class="form-control", size=32, placeholder="VendID") }}
+            {{ form.SITE(class="custom-select", placeholder="Site ID") }}
+            <div class="input-group-prepend">
+                <div class="input-group-text">Year</div>
+                {{ form.EQUALITY(class="custom-select", placeholder="place") }}
+            {{ form.ADD(class="form-control", size=8, placeholder="Year")}}
+            </div>
+            {{ form.Query(class="btn btn-outline-success") }}
+            <button class="btn btn-outline-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Help </button>
+
+        </form>
+
+
+      </div>
+      
+
+      <div class="collapse m-2" id="collapseExample">
+        <div class="card card-body">
+          Please be patient while the server fetches the data.
+          <br>
+          Enter an exact inventory id, or add a '%' a the end to see IDs that begin with your entry.
+          <br>
+          For example: '2022%' returns inventory IDs that begin with '2022'
+          <br>
+          Hitting 'Query' without filtering takes a very long time to process. 
+        </div>
+      </div>
+
+        {{ res|safe }}
+
+    </div>
+  </div>
+
+
+
+{% endblock %}

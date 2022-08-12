@@ -1,4 +1,7 @@
 
+from ast import Eq
+
+
 def stockcheck(ID='%', SITE='%', DESC='%', EQUALITY="LIKE", QTY="QtyAvail", FILTER="%"):
 
     base = '''
@@ -79,10 +82,10 @@ def lotcheck(ID='%', SITE='%'):
     sqlstr = base + id + site + order
     return sqlstr
 
-
+'''
 def itemsalescheck(ID='%', SITE='%', EQUALITY="LIKE", YEAR='%', DESC='%'):
 
-    base = '''
+    base = 
 
     WITH comb AS
     (
@@ -101,7 +104,7 @@ def itemsalescheck(ID='%', SITE='%', EQUALITY="LIKE", YEAR='%', DESC='%'):
 
     SELECT * FROM comb
     WHERE [Year To Date Sales] > 0
-    '''
+    
     id = " AND [Inventory ID] LIKE '" + ID + "'"
     site = " AND [Site ID] LIKE '" + SITE + "'"
     year = " AND [Fiscal Year] " + EQUALITY + " '" + YEAR + "'"
@@ -110,3 +113,110 @@ def itemsalescheck(ID='%', SITE='%', EQUALITY="LIKE", YEAR='%', DESC='%'):
 
     sqlstr = base + id + site + year + desc + order
     return sqlstr
+'''
+
+def itemsalescheck(ID='%', SITE='%', EQUALITY="LIKE", YEAR='%', DESC='%'):
+
+    databases = ["INNOINCAPP", "INNOCNAPP", "INNOKKAPP", "INNOMYRAPP", "INNOSGDAPP", "INNOTHBAPP"]
+
+    sqlstr = '''
+    WITH comb AS
+    (
+    '''
+
+    for db in databases:
+        sqlstr += "SELECT "
+        sqlstr += db + ".dbo.QQ_itemhist.[Inventory ID],"
+        sqlstr += db + ".dbo.QQ_itemhist.[Inventory Description],"
+        sqlstr += db + ".dbo.QQ_itemhist.[Site ID],"
+        sqlstr += db + ".dbo.QQ_itemhist.[Site Name],"
+        sqlstr += db + ".dbo.QQ_itemhist.[Fiscal Year],"
+        sqlstr += db + ".dbo.QQ_itemhist.[Year To Date Sales],"
+        sqlstr += db + ".dbo.QQ_itemhist.[Year To Date Quantity Sold]"
+        sqlstr += '''
+        FROM ''' + db + '''.dbo.QQ_itemhist '''
+        
+        if db != databases[-1]:
+            sqlstr += '''
+             UNION ALL
+            '''
+
+
+    sqlstr += '''
+    )
+    SELECT * FROM comb
+    WHERE [Year To Date Sales] > 0
+    '''
+
+    sqlstr += " AND [Inventory ID] LIKE '" + ID + "'"
+    sqlstr += " AND [Site ID] LIKE '" + SITE + "'"
+    sqlstr += " AND [Fiscal Year] " + EQUALITY + " '" + YEAR + "'"
+    sqlstr += " AND [Inventory Description] LIKE '" + DESC + "'"
+    sqlstr += ' ORDER BY [Inventory ID] ASC'
+
+    return sqlstr
+
+'''
+SELECT TOP 400 
+INNOINCAPP.dbo.QQ_itemhist.[Inventory ID],
+INNOINCAPP.dbo.QQ_itemhist.[Inventory Description],
+INNOINCAPP.dbo.QQ_itemhist.[Site ID],
+INNOINCAPP.dbo.QQ_itemhist.[Site Name],
+INNOINCAPP.dbo.QQ_itemhist.[Fiscal Year],
+INNOINCAPP.dbo.QQ_itemhist.[Year To Date Sales],
+INNOINCAPP.dbo.QQ_itemhist.[Year To Date Quantity Sold],
+INNOINCAPP.dbo.ItemXRef.AlternateID,
+INNOINCAPP.dbo.ItemXRef.EntityID,
+INNOINCAPP.dbo.ItemXRef.Descr
+FROM INNOINCAPP.dbo.QQ_itemhist
+LEFT JOIN INNOINCAPP.dbo.ItemXRef
+ON INNOINCAPP.dbo.QQ_itemhist.[Inventory ID] = INNOINCAPP.dbo.ItemXRef.InvtID
+WHERE INNOINCAPP.dbo.QQ_itemhist.[Year To Date Sales] > 0
+'''
+
+
+def vendorpoquery(SITE='%', EQUALITY="LIKE", YEAR='%', DESC='%'):
+
+
+    sqlstr =    '''
+    WITH comb AS (
+    SELECT CpnyID, VendID, FiscYr, YTDPurch
+    FROM INNOINCAPP.dbo.APHist
+
+    UNION ALL
+
+    SELECT CpnyID, VendID, FiscYr, YTDPurch
+    FROM INNOCNAPP.dbo.APHist
+
+    UNION ALL
+
+    SELECT CpnyID, VendID, FiscYr, YTDPurch
+    FROM INNOKKAPP.dbo.APHist
+
+    UNION ALL
+
+    SELECT CpnyID, VendID, FiscYr, YTDPurch
+    FROM INNOMYRAPP.dbo.APHist
+
+    UNION ALL
+
+    SELECT CpnyID, VendID, FiscYr, YTDPurch
+    FROM INNOSGDAPP.dbo.APHist
+
+    UNION ALL
+
+    SELECT CpnyID, VendID, FiscYr, YTDPurch
+    FROM INNOTHBAPP.dbo.APHist
+
+    )
+    SELECT * FROM comb
+    '''
+
+    sqlstr += "WHERE YTDPurch > 0 AND VendID LIKE '" + DESC + "' AND FiscYr " + EQUALITY + " '" + YEAR + "' AND CpnyID LIKE '" + SITE + "'"
+    sqlstr += "ORDER BY FiscYr DESC, VendID ASC"
+
+    return sqlstr
+
+
+
+

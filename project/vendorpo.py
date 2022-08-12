@@ -4,28 +4,23 @@ from . import tableutil as t
 from . import forms
 from . import queries
 
-bp = Blueprint('itemsales',__name__)
+bp = Blueprint('vendorpo',__name__)
 
-@bp.route('/itemsales', methods=('GET','POST'))   
+@bp.route('/vendorpo', methods=('GET','POST'))   
 def itemsales():
     df = pandas.DataFrame()
 
     # ID and SITE form
     form = forms.IDandSITEForm()
-    formparams = {"ID":"9x9x9x9x9x9x9", "SITE":"%", "EQUALITY":"LIKE", "YEAR":"%", "DESC":"%"}
+    formparams = {"SITE":"%", "EQUALITY":"LIKE", "YEAR":"%", "DESC":"%"}
 
-    sqlstr = queries.itemsalescheck(**formparams)
+    sqlstr = queries.vendorpoquery(**formparams)
     df = t.runquery(sqlstr)
-    form.SITE.choices = [('%','All Locations'), ('HGZ','China'), ('MAIN','Japan'), ('IS','Singapore'), ('MY','Malaysia'), ('HK','Hong Kong'), ('CUSTOMER','Customer'), ('SE','SE'), ('TH','Thailand'), ('US','United States')]
+    form.SITE.choices = [('%','All Locations'), ('INNOCN','INNOCN'), ('INNOINC','INNOINC'), ('INNOKK','INNOKK'), ('INNOTH','INNOTH')]
     form.EQUALITY.choices = [('LIKE','Any'), ('>','>'), ('=','='), ('<','<')]
 
 
     if form.Query.data:
-        if form.ID.data == "":
-            formparams['ID'] = "%"
-        
-        if form.ID.data != "":
-            formparams['ID'] = form.ID.data
 
         if form.DESC.data != "":
             formparams['DESC'] = form.DESC.data
@@ -40,7 +35,7 @@ def itemsales():
 
         formparams['SITE'] = form.SITE.data
 
-        sqlstr = queries.itemsalescheck(**formparams)
+        sqlstr = queries.vendorpoquery(**formparams)
         df = t.runquery(sqlstr)
 
     numrows = df.shape[0]
@@ -49,4 +44,10 @@ def itemsales():
     # session["dfcsv"] = dfcsv
         
     res = t.conv_html(df)
-    return render_template('itemsales.html', res=res, form=form, numrows=numrows)
+    return render_template('vendorpo.html', res=res, form=form, numrows=numrows)
+
+
+
+
+
+

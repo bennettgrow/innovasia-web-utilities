@@ -26,7 +26,11 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
 
-    from . import stock, lots, itemsales
+    @app.route('/sales')
+    def sales():
+        return render_template('sales.html')
+
+    from . import stock, lots, itemsales, vendorpo
 
     app.register_blueprint(stock.bp)
     app.add_url_rule('/stock', endpoint='stock')
@@ -36,6 +40,9 @@ def create_app(test_config=None):
 
     app.register_blueprint(itemsales.bp)
     app.add_url_rule('/itemsales', endpoint='itemsales')
+
+    app.register_blueprint(vendorpo.bp)
+    app.add_url_rule('/vendorpo', endpoint='vendorpo')
 
     @app.route('/download')
     def download():
